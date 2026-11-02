@@ -1,0 +1,3642 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CarrerX – Intelligent Job Matching & Career Platform</title>
+
+  <meta name="description" content="AI-driven job matching and recommendation platform with deep company intelligence, location climate guides, onboarding timelines, holiday metrics, and live application tracking.">
+
+  <link rel="stylesheet" href="style.css?v=7.0.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body class="light-frame">
+
+
+
+  <!-- TOP NAVIGATION HEADER -->
+
+  <header class="app-header">
+
+    <div class="header-container">
+
+      <div class="logo-group">
+
+        <div class="logo-icon">⚡</div>
+
+        <div class="logo-text">
+
+          <h1>CarrerX <span class="badge-ai">AI</span></h1>
+
+          <p class="tagline">Intelligent Matching • Company Intelligence • Live Applications</p>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="header-actions">
+
+        <!-- Java Server Connection Status Badge -->
+
+        <div id="serverStatusBadge" class="status-indicator checking">
+
+          <span class="status-dot"></span>
+
+          <span class="status-text" id="serverStatusText">Connecting to Java Engine...</span>
+
+        </div>
+
+
+
+        <button id="toggleWeightsModalBtn" class="header-btn" title="Configure Attribute Weights">
+
+          <span class="icon">⚖️</span>
+
+          <span class="btn-label">Weights (60% Skills)</span>
+
+        </button>
+
+
+
+        <button id="myApplicationsBtn" class="header-btn highlight-btn" title="View Application Status Across 5 Stages">
+
+          <span class="icon">📋</span>
+
+          <span class="btn-label">Application Status</span>
+
+          <span id="applicationsCountBadge" class="counter-badge">0</span>
+
+        </button>
+
+
+
+        <button id="savedJobsBtn" class="header-btn" title="View Bookmarked Jobs">
+
+          <span class="icon">🔖</span>
+
+          <span class="btn-label">Saved</span>
+
+          <span id="savedCountBadge" class="counter-badge">0</span>
+
+        </button>
+
+
+
+        <button id="salaryBenchmarkBtn" class="header-btn" title="View Real Statistical Salary Benchmarks">
+
+          <span class="icon">📊</span>
+
+          <span class="btn-label">Benchmark</span>
+
+        </button>
+
+
+
+        <button id="themeToggleBtn" class="header-btn icon-only" title="Toggle Light/Dark Theme">
+
+          <span id="themeIcon">☀️</span>
+
+        </button>
+
+
+
+        <!-- User Authentication Header Badge (Shown When Logged In) -->
+
+        <div id="authUserBadge" class="auth-user-badge hidden">
+
+          <div class="user-avatar-badge" id="headerUserAvatar">RP</div>
+
+          <div class="user-info-text">
+
+            <span class="user-name" id="headerUserName">Rohan Patel</span>
+
+            <span class="user-role" id="headerUserRole">Fresher (0–1y)</span>
+
+          </div>
+
+          <button type="button" id="logoutBtn" class="header-btn logout-btn" title="Sign Out of Candidate Account">
+
+            <span class="icon">🚪</span>
+
+            <span class="btn-label">Sign Out</span>
+
+          </button>
+
+        </div>
+
+
+
+        <!-- Sign In Button (Shown When Not Logged In) -->
+
+        <button type="button" id="navLoginBtn" class="header-btn primary-header-btn" title="Sign In to Candidate Account">
+
+          <span class="icon">👤</span>
+
+          <span class="btn-label">Sign In</span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- ==============================================================================
+
+       AUTHENTICATION & LOGIN PORTAL
+
+       ============================================================================== -->
+
+  <section id="authPortal" class="auth-portal-section">
+
+    <div class="auth-container">
+
+      <!-- Left Column: Platform Value Proposition & Brand -->
+
+      <div class="auth-brand-side">
+
+        <div class="auth-brand-top">
+
+          <div class="auth-logo">
+
+            <span class="auth-logo-icon">⚡</span>
+
+            <span>CarrerX <span class="badge-ai" style="font-size:0.75rem; vertical-align:middle; background:rgba(255,255,255,0.2); color:#ffffff; padding:0.15rem 0.4rem; border-radius:4px;">AI</span></span>
+
+          </div>
+
+          <h2 class="auth-brand-title">Intelligent Career Discovery & Hiring Platform</h2>
+
+          <p class="auth-brand-desc">
+
+            Sign in to unlock AI-powered candidate profile matching, deep company intelligence, and automated 5-stage application tracking.
+
+          </p>
+
+
+
+          <div class="auth-feature-list">
+
+            <div class="auth-feature-item">
+
+              <div class="auth-feature-icon">🎯</div>
+
+              <div class="auth-feature-text">
+
+                <h5>Intelligent Job Matching</h5>
+
+                <p>Multi-attribute comparison across skills, experience tiers, and expected salary.</p>
+
+              </div>
+
+            </div>
+
+            <div class="auth-feature-item">
+
+              <div class="auth-feature-icon">🏢</div>
+
+              <div class="auth-feature-text">
+
+                <h5>Deep Company Intelligence</h5>
+
+                <p>Verified tech stacks, culture ratings, funding stages, and onboarding timelines.</p>
+
+              </div>
+
+            </div>
+
+            <div class="auth-feature-item">
+
+              <div class="auth-feature-icon">📋</div>
+
+              <div class="auth-feature-text">
+
+                <h5>Live Application Pipeline</h5>
+
+                <p>Track your applications across 5 stages with automated backend evaluations.</p>
+
+              </div>
+
+            </div>
+
+            <div class="auth-feature-item">
+
+              <div class="auth-feature-icon">⚡</div>
+
+              <div class="auth-feature-text">
+
+                <h5>Instant 1-Click & Multi-Job Apply</h5>
+
+                <p>Apply to multiple roles simultaneously with custom-tailored cover letters.</p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="auth-brand-footer">
+
+          <span>🔒 Enterprise Session Security • Java Backend Connected (Port 8080)</span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Right Column: Authentication Card -->
+
+      <div class="auth-form-side">
+
+        <div class="auth-tabs">
+
+          <button type="button" class="auth-tab-btn active" data-auth-tab="login" id="tabLoginBtn">Sign In</button>
+
+          <button type="button" class="auth-tab-btn" data-auth-tab="register" id="tabRegisterBtn">Create Account</button>
+
+        </div>
+
+
+
+        <!-- 1. SIGN IN TAB PANE -->
+
+        <div id="loginTabPane" class="auth-tab-pane">
+
+          <div class="auth-form-header">
+
+            <h3>Candidate Sign In</h3>
+
+            <p>Access your personalized job matches and active application dashboard.</p>
+
+          </div>
+
+
+
+          <!-- Quick 1-Click Demo Profiles -->
+
+          <div class="quick-demo-section">
+
+            <div class="quick-demo-title">
+
+              <span>⚡</span> 1-Click Quick Demo Sign In:
+
+            </div>
+
+            <div class="demo-account-grid">
+
+              <button type="button" class="demo-account-btn" data-demo-email="rohan.patel@graduate.edu" data-demo-name="Rohan Patel" data-demo-profile="fresher-java">
+
+                <div class="demo-btn-left">
+
+                  <span>🎓</span>
+
+                  <div>
+
+                    <strong>Rohan Patel</strong> (Fresher • 0–1y Exp)
+
+                    <div style="font-size:0.72rem; color:var(--text-muted);">Java • SQL • Git • OOP</div>
+
+                  </div>
+
+                </div>
+
+                <span class="demo-tag">Quick Login ➔</span>
+
+              </button>
+
+
+
+              <button type="button" class="demo-account-btn" data-demo-email="elena.rostova@techhub.io" data-demo-name="Elena Rostova" data-demo-profile="java-fullstack">
+
+                <div class="demo-btn-left">
+
+                  <span>💻</span>
+
+                  <div>
+
+                    <strong>Elena Rostova</strong> (Senior Java • 6.5y Exp)
+
+                    <div style="font-size:0.72rem; color:var(--text-muted);">Spring Boot • React • Kafka • Microservices</div>
+
+                  </div>
+
+                </div>
+
+                <span class="demo-tag">Quick Login ➔</span>
+
+              </button>
+
+
+
+              <button type="button" class="demo-account-btn" data-demo-email="marcus.vance@aimind.org" data-demo-name="Marcus Vance" data-demo-profile="ai-ml">
+
+                <div class="demo-btn-left">
+
+                  <span>🤖</span>
+
+                  <div>
+
+                    <strong>Marcus Vance</strong> (Staff AI Engineer • 8y Exp)
+
+                    <div style="font-size:0.72rem; color:var(--text-muted);">Python • PyTorch • LLMs • Distributed Systems</div>
+
+                  </div>
+
+                </div>
+
+                <span class="demo-tag">Quick Login ➔</span>
+
+              </button>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="auth-divider">
+
+            <span>OR SIGN IN WITH CREDENTIALS</span>
+
+          </div>
+
+
+
+          <form id="loginForm" autocomplete="on">
+
+            <div class="auth-input-group">
+
+              <label for="loginEmail">Email Address</label>
+
+              <input type="email" id="loginEmail" placeholder="e.g. rohan.patel@graduate.edu" value="rohan.patel@graduate.edu" required autocomplete="username">
+
+            </div>
+
+
+
+            <div class="auth-input-group">
+
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+
+                <label for="loginPassword" style="margin-bottom:0;">Password</label>
+
+                <span style="font-size:0.75rem; color:var(--primary-color); cursor:pointer;" onclick="alert('Demo accounts accept any password or password123')">Demo hint?</span>
+
+              </div>
+
+              <input type="password" id="loginPassword" placeholder="••••••••" value="password123" required autocomplete="current-password">
+
+            </div>
+
+
+
+            <div id="loginErrorAlert" class="auth-error-alert hidden"></div>
+
+
+
+            <button type="submit" id="submitLoginBtn" class="auth-submit-btn">
+
+              <span>Sign In & Launch Platform</span> 🚀
+
+            </button>
+
+          </form>
+
+        </div>
+
+
+
+        <!-- 2. CREATE ACCOUNT TAB PANE -->
+
+        <div id="registerTabPane" class="auth-tab-pane hidden">
+
+          <div class="auth-form-header">
+
+            <h3>Create Candidate Account</h3>
+
+            <p>Set up your profile to receive intelligent recommendations and apply to open jobs.</p>
+
+          </div>
+
+
+
+          <form id="registerForm" autocomplete="on">
+
+            <div class="auth-input-group">
+
+              <label for="regFullName">Full Name</label>
+
+              <input type="text" id="regFullName" placeholder="e.g. Alex Morgan" required>
+
+            </div>
+
+
+
+            <div class="auth-input-group">
+
+              <label for="regEmail">Email Address</label>
+
+              <input type="email" id="regEmail" placeholder="e.g. alex.morgan@example.com" required>
+
+            </div>
+
+
+
+            <div class="auth-input-group">
+
+              <label for="regPassword">Password</label>
+
+              <input type="password" id="regPassword" placeholder="Create a secure password" value="password123" required>
+
+            </div>
+
+
+
+            <div class="auth-input-group">
+
+              <label for="regExpYears">Experience Level</label>
+
+              <select id="regExpYears">
+
+                <option value="0">Fresher / Graduate (0–1 Year)</option>
+
+                <option value="3" selected>Mid-Level Engineer (2–4 Years)</option>
+
+                <option value="6">Senior Engineer (5–8 Years)</option>
+
+                <option value="9">Lead Engineer / Architect (9+ Years)</option>
+
+              </select>
+
+            </div>
+
+
+
+            <div class="auth-input-group">
+
+              <label for="regSkills">Core Technical Skills (comma separated)</label>
+
+              <input type="text" id="regSkills" placeholder="e.g. Java, Spring Boot, React, SQL" value="Java, Spring Boot, React, SQL">
+
+            </div>
+
+
+
+            <div id="regErrorAlert" class="auth-error-alert hidden"></div>
+
+
+
+            <button type="submit" id="submitRegBtn" class="auth-submit-btn">
+
+              <span>Register & Access Platform</span> 🚀
+
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- MAIN APPLICATION LAYOUT (Gated for Authenticated Users) -->
+
+  <div id="mainAppLayout" class="main-app-layout hidden">
+
+  <!-- TOP PLATFORM FEATURE NAVIGATION BAR -->
+
+  <nav class="platform-nav-tabs" id="platformNavTabs">
+
+    <div class="nav-tabs-container">
+
+      <button type="button" class="nav-tab-btn active" data-view="matcher">
+
+        <span class="tab-icon">🎯</span>
+
+        <span class="tab-text">Job Matches</span>
+
+      </button>
+
+      <button type="button" class="nav-tab-btn" data-view="career-predictor">
+
+        <span class="tab-icon">🔮</span>
+
+        <span class="tab-text">AI Career Predictor</span>
+
+        <span class="tab-badge">AI</span>
+
+      </button>
+
+      <button type="button" class="nav-tab-btn" data-view="skill-gap">
+
+        <span class="tab-icon">🧩</span>
+
+        <span class="tab-text">Skill Gap Finder</span>
+
+      </button>
+    </div>
+
+  </nav>
+
+
+
+
+
+  <!-- HERO METRICS STRIP -->
+
+  <section class="hero-strip">
+
+    <div class="hero-container">
+
+      <div class="hero-intro">
+
+        <h2>Intelligent Job Matching with <span class="gradient-text">Company & Location Intelligence</span></h2>
+
+        <p>Explore recommended tech careers with full transparency into <strong>company culture, joining timelines, annual holidays, local climate & weather</strong>, and submit live applications directly to hiring teams.</p>
+
+      </div>
+
+      <div class="hero-metrics">
+
+        <div class="metric-card">
+
+          <span class="metric-num" id="totalJobsCounter">17+</span>
+
+          <span class="metric-label">Verified Jobs</span>
+
+        </div>
+
+        <div class="metric-card">
+
+          <span class="metric-num">60%</span>
+
+          <span class="metric-label">Skills Weight</span>
+
+        </div>
+
+        <div class="metric-card">
+
+          <span class="metric-num">Live</span>
+
+          <span class="metric-label">Apply Portal</span>
+
+        </div>
+
+        <div class="metric-card">
+
+          <span class="metric-num">100%</span>
+
+          <span class="metric-label">Company Intel</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- QUICK DEMO CANDIDATE PROFILES -->
+
+  <section class="demo-profiles-strip">
+
+    <div class="profiles-container">
+
+      <span class="demo-label"><span class="sparkle">✨</span> 1-Click Demo Profiles:</span>
+
+      <div class="demo-pills">
+
+        <button class="demo-pill highlight-fresher" data-profile="fresher-java">🎓 Fresher / Graduate (0–1 yr)</button>
+
+        <button class="demo-pill" data-profile="mid-fullstack">💼 Mid-Level Dev (3 yrs)</button>
+
+        <button class="demo-pill" data-profile="java-fullstack">☕ Senior Java Full Stack (6 yrs)</button>
+
+        <button class="demo-pill" data-profile="ai-ml">🤖 AI & LLM Engineer (4 yrs)</button>
+
+        <button class="demo-pill highlight-manager" data-profile="senior-manager">👔 Senior Manager / Lead (8+ yrs)</button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- MAIN APP CONTAINER (TWO-COLUMN INTERFACE) -->
+
+  <main class="main-container">
+
+    
+
+    <!-- LEFT PANEL: USER RESUME & SKILLS INPUT -->
+
+    <aside class="profile-panel">
+
+      
+
+      <!-- CARD 1: RESUME INPUT -->
+
+      <div class="panel-card">
+
+        <div class="card-header">
+
+          <div class="title-with-icon">
+
+            <span class="panel-icon">📄</span>
+
+            <h3>Resume & Candidate Profile</h3>
+
+          </div>
+
+          <button id="extractSkillsBtn" class="small-action-btn" title="Extract skills automatically using AI parser">
+
+            <span class="icon">🪄</span> Auto-Extract
+
+          </button>
+
+        </div>
+
+
+
+        <div class="resume-input-tabs">
+
+          <button class="tab-btn active" data-tab="paste-tab">Paste Text</button>
+
+          <button class="tab-btn" data-tab="upload-tab">Upload Document</button>
+
+        </div>
+
+
+
+        <!-- TAB 1: TEXT AREA -->
+
+        <div id="pasteTabContent" class="tab-content active">
+
+          <div class="textarea-wrapper">
+
+            <textarea id="resumeTextInput" placeholder="Paste your resume here (e.g. summary, previous roles, projects, skills, education)..." rows="6"></textarea>
+
+            <div class="textarea-footer">
+
+              <span id="wordCountLabel">0 words • 0 chars</span>
+
+              <button id="clearResumeBtn" class="text-link-btn">Clear</button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- TAB 2: FILE UPLOAD ZONE -->
+
+        <div id="uploadTabContent" class="tab-content">
+
+          <div id="dropZone" class="drop-zone">
+
+            <input type="file" id="resumeFileInput" accept=".txt,.pdf,.docx,.json,.md" class="file-input-hidden">
+
+            <div class="drop-zone-content">
+
+              <span class="upload-icon">📂</span>
+
+              <p class="drop-text">Drag & drop your resume file here</p>
+
+              <span class="drop-subtext">Supports TXT, PDF, DOCX, JSON, MD</span>
+
+              <button type="button" class="browse-btn" onclick="document.getElementById('resumeFileInput').click()">Browse File</button>
+
+            </div>
+
+          </div>
+
+          <div id="fileUploadStatus" class="file-status hidden">
+
+            <span class="file-name" id="uploadedFileName">resume.pdf</span>
+
+            <button id="removeFileBtn" class="remove-btn">✕</button>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- DETECTED PROFILE ENTITIES -->
+
+        <div id="extractedInfoCard" class="extracted-info-box hidden">
+
+          <div class="info-row">
+
+            <span class="info-label">Detected Contact:</span>
+
+            <span class="info-val" id="extractedEmailPhone">Not found</span>
+
+          </div>
+
+          <div class="info-row">
+
+            <span class="info-label">Estimated Exp:</span>
+
+            <span class="info-val" id="extractedYears">N/A</span>
+
+          </div>
+
+          <div class="info-row">
+
+            <span class="info-label">Competencies:</span>
+
+            <span class="info-val" id="extractedEdu">N/A</span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- CARD 2: YEARS OF EXPERIENCE & STRICT FILTERING -->
+
+      <div class="panel-card highlight-card">
+
+        <div class="card-header">
+
+          <div class="title-with-icon">
+
+            <span class="panel-icon">⏳</span>
+
+            <h3>Years of Experience</h3>
+
+          </div>
+
+          <span id="activeTierBadge" class="tier-badge fresher">Fresher (0–1y)</span>
+
+        </div>
+
+
+
+        <!-- Segmented Tier Selector -->
+
+        <div class="experience-segmented-control">
+
+          <button type="button" class="tier-btn active" data-years="0" data-tier="fresher">
+
+            <span class="tier-icon">🎓</span>
+
+            <span class="tier-title">Fresher</span>
+
+            <span class="tier-range">0–1 Year</span>
+
+          </button>
+
+          <button type="button" class="tier-btn" data-years="3" data-tier="mid">
+
+            <span class="tier-icon">💼</span>
+
+            <span class="tier-title">Mid-Level</span>
+
+            <span class="tier-range">2–4 Years</span>
+
+          </button>
+
+          <button type="button" class="tier-btn" data-years="6" data-tier="senior">
+
+            <span class="tier-icon">🚀</span>
+
+            <span class="tier-title">Senior</span>
+
+            <span class="tier-range">5–7 Years</span>
+
+          </button>
+
+          <button type="button" class="tier-btn" data-years="8" data-tier="lead">
+
+            <span class="tier-icon">👔</span>
+
+            <span class="tier-title">Lead / Manager</span>
+
+            <span class="tier-range">8+ Years</span>
+
+          </button>
+
+        </div>
+
+
+
+        <!-- Exact Years Stepper -->
+
+        <div class="exact-years-row">
+
+          <label for="exactYearsInput">Exact Experience Value:</label>
+
+          <div class="stepper-wrap">
+
+            <button type="button" id="decrementYearsBtn" class="stepper-btn">−</button>
+
+            <input type="number" id="exactYearsInput" min="0" max="25" value="0">
+
+            <button type="button" id="incrementYearsBtn" class="stepper-btn">+</button>
+
+            <span class="stepper-unit">years</span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Strict Experience Filtering Toggle -->
+
+        <div class="strict-filter-box">
+
+          <label class="custom-checkbox-label">
+
+            <input type="checkbox" id="strictExperienceCheckbox" checked>
+
+            <span class="checkbox-text">
+
+              <strong>Strict Experience Guard:</strong> Prevent entry-level users from seeing senior manager roles.
+
+            </span>
+
+          </label>
+
+          <p class="strict-filter-hint">
+
+            🛡️ Freshers (0–1y) will never be shown Senior, Lead, or Executive Director roles.
+
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- CARD 3: SKILLS & PREFERENCES -->
+
+      <div class="panel-card">
+
+        <div class="card-header">
+
+          <div class="title-with-icon">
+
+            <span class="panel-icon">💡</span>
+
+            <h3>Skills & Preferences</h3>
+
+          </div>
+
+          <span class="skill-count-badge" id="skillCountBadge">0 skills added</span>
+
+        </div>
+
+
+
+        <!-- Skill Tag Input -->
+
+        <div class="form-group">
+
+          <label for="skillInput">Technical Skills</label>
+
+          <div class="tag-input-container" id="tagInputContainer">
+
+            <div id="skillTagsList" class="tags-list"></div>
+
+            <input type="text" id="skillInput" placeholder="Type skill (e.g. Java, React, SQL) and press Enter..." autocomplete="off">
+
+          </div>
+
+          <div id="skillSuggestionsDropdown" class="suggestions-dropdown hidden"></div>
+
+        </div>
+
+
+
+        <!-- Popular Quick-Add Skills -->
+
+        <div class="quick-skills-section">
+
+          <span class="sub-label">Popular Skills:</span>
+
+          <div class="quick-skill-chips">
+
+            <button type="button" class="chip" data-skill="Java">Java</button>
+
+            <button type="button" class="chip" data-skill="Spring Boot">Spring Boot</button>
+
+            <button type="button" class="chip" data-skill="React">React</button>
+
+            <button type="button" class="chip" data-skill="JavaScript">JavaScript</button>
+
+            <button type="button" class="chip" data-skill="HTML">HTML</button>
+
+            <button type="button" class="chip" data-skill="CSS">CSS</button>
+
+            <button type="button" class="chip" data-skill="Python">Python</button>
+
+            <button type="button" class="chip" data-skill="SQL">SQL</button>
+
+            <button type="button" class="chip" data-skill="Git">Git</button>
+
+            <button type="button" class="chip" data-skill="Docker">Docker</button>
+
+            <button type="button" class="chip" data-skill="AWS">AWS</button>
+
+            <button type="button" class="chip" data-skill="Machine Learning">Machine Learning</button>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Expected Minimum Salary -->
+
+        <div class="form-group">
+
+          <div class="slider-header">
+
+            <label for="salaryRange">Minimum Expected Annual Salary</label>
+
+            <span id="salaryDisplay" class="salary-display-value">₹12 LPA</span>
+
+          </div>
+
+          <input type="range" id="salaryRange" min="300000" max="8000000" step="50000" value="1200000" class="range-slider">
+
+          <div class="slider-scale">
+
+            <span>₹3.5 LPA</span>
+
+            <span>₹18 LPA</span>
+
+            <span>₹50+ LPA</span>
+
+          </div>        </div>
+
+
+
+        <!-- Currency & Region Filter (NEW) -->
+
+        <div class="form-group" style="margin-top: 0.65rem;">
+
+          <label style="font-weight:700;">💱 Currency & Region</label>
+
+          <div class="work-mode-segmented-control" id="currencySegmentedControl">
+
+            <button type="button" class="currency-filter-btn active" data-curr="INR">🇮🇳 Indian Tech Market (₹ LPA)</button>
+
+            <button type="button" class="currency-filter-btn" data-curr="Any">🌐 All Opportunities</button>
+
+          </div>
+
+          <input type="hidden" id="currencyFilterSelect" value="INR">
+
+        </div>
+
+
+
+        <!-- Personalization Preferences: Location, Climate, Work Mode, Working Hours -->
+
+        <div class="preferences-group-title">
+
+          <span>🎯 Personalization & Preferred Options</span>
+
+        </div>
+
+
+
+        <!-- The Three Work Mode Options (Online/Remote, Offline/On-site, Hybrid) -->
+
+        <div class="form-group">
+
+          <label>🌐 Work Mode (Choose from the 3 Options)</label>
+
+          <div class="work-mode-segmented-control" id="workModeSegmentedControl">
+
+            <button type="button" class="workmode-btn active" data-mode="Any">All Modes</button>
+
+            <button type="button" class="workmode-btn" data-mode="Online/Remote">
+
+              <span class="mode-icon">💻</span> Online/Remote
+
+            </button>
+
+            <button type="button" class="workmode-btn" data-mode="Offline/On-site">
+
+              <span class="mode-icon">🏢</span> Offline/On-site
+
+            </button>
+
+            <button type="button" class="workmode-btn" data-mode="Hybrid">
+
+              <span class="mode-icon">🔄</span> Hybrid
+
+            </button>
+
+          </div>
+
+          <input type="hidden" id="workModeSelect" value="Any">
+
+        </div>
+
+
+
+        <!-- The Three Location Options (City, State, Remote) -->
+
+        <div class="form-group">
+
+          <label>📍 Location Selection (3 Options: City, State, or Remote)</label>
+
+          <div class="location-segmented-control" id="locationTypeSegmentedControl">
+
+            <button type="button" class="loctype-btn active" data-loctype="city">🏙️ By City</button>
+
+            <button type="button" class="loctype-btn" data-loctype="state">🗺️ By State</button>
+
+            <button type="button" class="loctype-btn" data-loctype="remote">💻 100% Remote</button>
+
+          </div>
+
+
+
+          <div id="cityLocationSubBox" class="loctype-sub-box">
+
+            <select id="citySelect" class="custom-select">
+
+              <option value="All">All Cities</option>
+
+              <option value="Bengaluru">Bengaluru, Karnataka (India) 🇮🇳</option>
+
+              <option value="Gurugram">Gurugram / NCR (India) 🇮🇳</option>
+
+              <option value="Hyderabad">Hyderabad, Telangana (India) 🇮🇳</option>
+
+              <option value="Mumbai">Mumbai, Maharashtra (India) 🇮🇳</option>
+
+              <option value="Chennai">Chennai, Tamil Nadu (India) 🇮🇳</option>
+
+              <option value="Noida">Noida, Uttar Pradesh (India) 🇮🇳</option>
+
+              <option value="Pune">Pune, Maharashtra (India) 🇮🇳</option>
+
+              <option value="San Francisco">San Francisco, CA 🇺🇸</option>
+
+              <option value="Seattle">Seattle, WA 🇺🇸</option>
+
+              <option value="New York">New York, NY 🇺🇸</option>
+
+              <option value="Austin">Austin, TX 🇺🇸</option>
+
+              <option value="Boston">Boston, MA 🇺🇸</option>
+
+            </select>
+
+          </div>
+
+
+
+          <div id="stateLocationSubBox" class="loctype-sub-box hidden">
+
+            <select id="stateSelect" class="custom-select">
+
+              <option value="All">All States / Regions</option>
+
+              <option value="Karnataka">Karnataka (India) 🇮🇳</option>
+
+              <option value="Telangana">Telangana (India) 🇮🇳</option>
+
+              <option value="Maharashtra">Maharashtra (India) 🇮🇳</option>
+
+              <option value="Delhi NCR">Delhi NCR / Haryana (India) 🇮🇳</option>
+
+              <option value="Tamil Nadu">Tamil Nadu (India) 🇮🇳</option>
+
+              <option value="Uttar Pradesh">Uttar Pradesh (India) 🇮🇳</option>
+
+              <option value="California">California (CA, USA) 🇺🇸</option>
+
+              <option value="Washington">Washington (WA, USA) 🇺🇸</option>
+
+              <option value="New York">New York (NY, USA) 🇺🇸</option>
+
+              <option value="Texas">Texas (TX, USA) 🇺🇸</option>
+
+              <option value="Massachusetts">Massachusetts (MA, USA) 🇺🇸</option>
+
+            </select>
+
+          </div>
+
+
+
+          <div id="remoteLocationSubBox" class="loctype-sub-box hidden">
+
+            <div class="remote-notice-badge">
+
+              <span>💻 Worldwide Distributed / 100% Online Work Selected</span>
+
+            </div>
+
+          </div>
+
+          <input type="hidden" id="locationPreferenceSelect" value="All">
+
+        </div>
+
+
+
+        <div class="form-row-2">
+
+          <div class="form-group">
+
+            <label for="climatePreferenceSelect">☀️ Climate & Weather</label>
+
+            <select id="climatePreferenceSelect" class="custom-select">
+
+              <option value="All">All Climate Types</option>
+
+              <option value="Warm & Sunny">Warm & Sunny / Mediterranean</option>
+
+              <option value="Mild / Temperate">Mild / Temperate Marine</option>
+
+              <option value="Four Seasons">Four Seasons / Continental</option>
+
+              <option value="Tropical">Tropical Warm / Sunny</option>
+
+            </select>
+
+          </div>
+
+          <div class="form-group">
+
+            <label for="workingHoursSelect">⏰ Working Hours / Shift</label>
+
+            <select id="workingHoursSelect" class="custom-select">
+
+              <option value="All">Any Working Hours</option>
+
+              <option value="Flexible Hours">Flexible Hours (Core 10am - 3pm)</option>
+
+              <option value="Standard Day">Standard Day (9am - 5pm)</option>
+
+              <option value="Global Flexible">Global Flexible / Async</option>
+
+              <option value="Morning Shift">Morning Shift (8am - 4pm)</option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="form-group">
+
+          <label for="categorySelect">📂 Job Discipline</label>
+
+          <select id="categorySelect" class="custom-select">
+
+            <option value="All">All Disciplines</option>
+
+            <option value="Software Engineering">Software Engineering</option>
+
+            <option value="AI & Machine Learning">AI & Machine Learning</option>
+
+            <option value="Cloud & DevOps">Cloud & DevOps</option>
+
+            <option value="Data">Data & Analytics</option>
+
+            <option value="Cybersecurity">Cybersecurity</option>
+
+            <option value="Mobile">Mobile Development</option>
+
+          </select>
+
+        </div>
+
+
+
+        <!-- SUBMIT / MATCH ACTION BUTTONS -->
+
+        <div class="action-buttons-group">
+
+          <button id="matchJobsBtn" class="primary-btn">
+
+            <span class="btn-icon">⚡</span>
+
+            <span>Calculate Job Matches</span>
+
+          </button>
+
+          <button id="resetFormBtn" class="secondary-btn" title="Reset all fields">Reset</button>
+
+        </div>
+
+
+
+      </div>
+
+
+
+      <!-- CARD 4: ATTRIBUTE WEIGHTS TUNER -->
+
+      <div class="panel-card weights-card">
+
+        <div class="card-header">
+
+          <div class="title-with-icon">
+
+            <span class="panel-icon">⚖️</span>
+
+            <h3>Attribute Weighting</h3>
+
+          </div>
+
+          <button id="resetWeightsBtn" class="text-link-btn">Reset Defaults</button>
+
+        </div>
+
+        <p class="weights-desc">Multi-attribute scoring distribution (defaults to 60% Technical Skills):</p>
+
+        
+
+        <div class="weight-item">
+
+          <div class="weight-label-row">
+
+            <span>🧠 Skills Match Weight:</span>
+
+            <strong id="skillsWeightLabel">60%</strong>
+
+          </div>
+
+          <input type="range" id="weightSkillsSlider" min="30" max="80" value="60" class="weight-slider">
+
+        </div>
+
+
+
+        <div class="weight-item">
+
+          <div class="weight-label-row">
+
+            <span>⏳ Experience Alignment Weight:</span>
+
+            <strong id="expWeightLabel">20%</strong>
+
+          </div>
+
+          <input type="range" id="weightExpSlider" min="10" max="40" value="20" class="weight-slider">
+
+        </div>
+
+
+
+        <div class="weight-item">
+
+          <div class="weight-label-row">
+
+            <span>💰 Salary Fit Weight:</span>
+
+            <strong id="salWeightLabel">10%</strong>
+
+          </div>
+
+          <input type="range" id="weightSalSlider" min="5" max="30" value="10" class="weight-slider">
+
+        </div>
+
+
+
+        <div class="weight-item">
+
+          <div class="weight-label-row">
+
+            <span>🌐 Work Mode & Discipline Weight:</span>
+
+            <strong id="prefWeightLabel">10%</strong>
+
+          </div>
+
+          <input type="range" id="weightPrefSlider" min="5" max="30" value="10" class="weight-slider">
+
+        </div>
+
+      </div>
+
+
+
+    </aside>
+
+
+
+    <!-- RIGHT PANEL: RECOMMENDATIONS & DETAILED SALARY RESULTS -->
+
+    <section class="results-panel">
+
+
+
+      <!-- RECOMMENDATION INSIGHTS OVERVIEW BANNER -->
+
+      <div id="resultsAnalyticsBanner" class="analytics-banner">
+
+        <div class="analytics-card">
+
+          <div class="analytics-icon green">🎯</div>
+
+          <div class="analytics-info">
+
+            <span class="analytics-value" id="topMatchScoreVal">--%</span>
+
+            <span class="analytics-title">Top Match Score</span>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="analytics-card">
+
+          <div class="analytics-icon blue">💼</div>
+
+          <div class="analytics-info">
+
+            <span class="analytics-value" id="totalMatchesVal">0</span>
+
+            <span class="analytics-title">Qualified Jobs</span>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="analytics-card">
+
+          <div class="analytics-icon gold">💰</div>
+
+          <div class="analytics-info">
+
+            <span class="analytics-value" id="avgSalaryVal">₹0 LPA</span>
+
+            <span class="analytics-title">Average Salary</span>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="analytics-card">
+
+          <div class="analytics-icon purple">🛡️</div>
+
+          <div class="analytics-info">
+
+            <span class="analytics-value" id="experienceGuardVal">Active</span>
+
+            <span class="analytics-title">Experience Guard</span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- LIVE APPLICATION STATUS & LIFECYCLE TRACKER (USER DASHBOARD) -->
+
+      <section id="dashboardApplicationTracker" class="dashboard-tracker-panel">
+
+        <div class="tracker-panel-header">
+
+          <div class="tracker-title-group">
+
+            <span class="tracker-icon">📋</span>
+
+            <div>
+
+              <h3>Application Status & Pipeline</h3>
+
+              <p>Real-time lifecycle tracking across 5 defined stages for your submitted roles and tailored cover letters</p>
+
+            </div>
+
+          </div>
+
+          <div class="tracker-header-actions">
+
+            <span id="trackerApplicationsCount" class="tracker-count-badge">0 Active</span>
+
+            <button id="refreshApplicationsBtn" class="refresh-apps-btn" title="Refresh Live Status from Server">🔄 Sync Status</button>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Defined Stages Legend Bar with Real-Time Badges -->
+
+        <div class="stages-legend-strip">
+
+          <div class="legend-step" title="Application received and registered in corporate talent acquisition system">
+
+            <span class="stage-badge-pill stage-applied" style="font-size:0.75rem; padding:0.25rem 0.65rem;">📋 Applied</span>
+
+          </div>
+
+          <div class="legend-step" title="Under technical review by hiring team">
+
+            <span class="stage-badge-pill stage-review" style="font-size:0.75rem; padding:0.25rem 0.65rem;">🔍 Under Review</span>
+
+          </div>
+
+          <div class="legend-step" title="Profile shortlisted for technical evaluation">
+
+            <span class="stage-badge-pill stage-shortlisted" style="font-size:0.75rem; padding:0.25rem 0.65rem;">⚡ Shortlisted</span>
+
+          </div>
+
+          <div class="legend-step" title="Candidate shortlisted for interview rounds">
+
+            <span class="stage-badge-pill stage-interview" style="font-size:0.75rem; padding:0.25rem 0.65rem;">🎙️ Interview</span>
+
+          </div>
+
+          <div class="legend-step" title="Candidate selected for employment offer">
+
+            <span class="stage-badge-pill stage-selected" style="font-size:0.75rem; padding:0.25rem 0.65rem;">🟢 Selected</span>
+
+          </div>
+
+          <div class="legend-step" title="Application not selected">
+
+            <span class="stage-badge-pill stage-rejected" style="font-size:0.75rem; padding:0.25rem 0.65rem;">🔴 Rejected</span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Dynamic Applications List -->
+
+        <div id="dashboardApplicationsGrid" class="dashboard-apps-grid">
+
+          <!-- Populated dynamically -->
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ACTIVE CONFIGURATION NOTICE -->
+
+      <div class="active-config-banner" id="activeConfigBanner">
+
+        <div class="config-badge-group">
+
+          <span class="config-pill">🎯 Candidate Tier: <strong id="summaryTierLabel">Fresher (0–1y)</strong></span>
+
+          <span class="config-pill">⚖️ Applied Weights: <strong id="summaryWeightsLabel">60% Skills • 20% Exp • 10% Sal • 10% Mode</strong></span>
+
+          <span class="config-pill" id="filterStatusPill">🛡️ Senior Manager Roles Filtered: <strong>ON</strong></span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- FILTER & SORT TOOLBAR -->
+
+      <div class="results-toolbar">
+
+        <div class="search-input-wrap">
+
+          <span class="search-icon">🔍</span>
+
+          <input type="text" id="jobSearchInput" placeholder="Search by title, company, skills, or location...">
+
+        </div>
+
+
+
+        <div class="toolbar-controls">
+
+          <div class="filter-group">
+
+            <label for="sortOrderSelect">Sort By:</label>
+
+            <select id="sortOrderSelect" class="filter-select">
+
+              <option value="match-desc">Highest Match %</option>
+
+              <option value="salary-desc">Highest Salary</option>
+
+              <option value="rating-desc">Highest Company Rating</option>
+
+              <option value="exp-asc">Lowest Exp Required</option>
+
+              <option value="title-asc">Job Title (A-Z)</option>
+
+            </select>
+
+          </div>
+
+
+
+          <div class="filter-pills-bar">
+
+            <button class="filter-tag-btn active" data-filter="all">All Jobs</button>
+
+            <button class="filter-tag-btn" data-filter="online">Online/Remote</button>
+
+            <button class="filter-tag-btn" data-filter="offline">Offline/On-site</button>
+
+            <button class="filter-tag-btn" data-filter="hybrid">Hybrid</button>
+
+            <button class="filter-tag-btn bookmark-tag" data-filter="bookmarks">🔖 Bookmarked Only</button>
+
+            <button class="filter-tag-btn" data-filter="fresher">Fresher Friendly</button>
+
+            <button class="filter-tag-btn" data-filter="top-rated">Top Rated (⭐ 4.5+)</button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- SKILL GAP & SALARY UPSKILLING BANNER -->
+
+      <div id="skillGapBanner" class="skill-gap-banner hidden">
+
+        <div class="gap-icon">💡</div>
+
+        <div class="gap-details">
+
+          <h4>Upskill Recommendation to Boost Your Match & Earning Potential</h4>
+
+          <p id="skillGapText">Adding missing in-demand skills could unlock additional roles averaging high compensation.</p>
+
+          <div id="gapSkillChips" class="gap-chips"></div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- MULTI-JOB APPLICATION CONTROL BAR -->
+
+      <div class="multi-apply-banner" id="multiApplyBanner">
+
+        <div class="multi-apply-left">
+
+          <span class="multi-apply-icon">🚀</span>
+
+          <div>
+
+            <h4>Apply to More Than One Job (Multi-Job Application)</h4>
+
+            <p>Select multiple roles below with checkboxes, or use the 3 quick options to apply in bulk:</p>
+
+          </div>
+
+        </div>
+
+        <div class="multi-apply-actions">
+
+          <span id="selectedJobsCountBadge" class="selected-count-badge">0 Jobs Selected</span>
+
+          <button type="button" id="batchApplyBtn" class="primary-btn batch-apply-btn" disabled>
+
+            🚀 Apply to Selected (<span id="batchCountNum">0</span>)
+
+          </button>
+
+          <button type="button" id="selectBookmarkedBtn" class="secondary-btn" title="Select all bookmarked jobs for multi-application">
+
+            🔖 Select All Bookmarked (<span id="bookmarkedCountNum">0</span>)
+
+          </button>
+
+          <button type="button" id="selectTopMatchesBtn" class="secondary-btn" title="Select top 3 recommended roles">
+
+            ⚡ Select Top 3 Matches
+
+          </button>
+
+          <button type="button" id="selectAllQualifiedBtn" class="secondary-btn" title="Select all recommended jobs currently displayed">
+
+            ☑️ Select All Qualified
+
+          </button>
+
+          <button type="button" id="clearSelectionBtn" class="text-link-btn hidden">Clear</button>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- MATCHED JOBS CARDS CONTAINER -->
+
+      <div id="jobsListContainer" class="jobs-grid">
+
+        <div class="empty-state">
+
+          <div class="empty-icon">🔍</div>
+
+          <h3>Ready to discover your ideal job matches</h3>
+
+          <p>Choose your Years of Experience above or pick a 1-click demo profile to calculate tailored recommendations with 60% skills weighting.</p>
+
+          <button class="empty-cta-btn" onclick="document.querySelector('.demo-pill.highlight-fresher').click()">Load Fresher Graduate Profile (0-1y)</button>
+
+        </div>
+
+      </div>
+
+
+
+    </section>
+
+
+
+  
+
+    <!-- ==============================================================================
+
+         FEATURE 1: AI CAREER PATH PREDICTOR
+
+         ============================================================================== -->
+
+    <section id="careerPredictorSection" class="platform-view-section hidden">
+
+      <div class="view-header-strip">
+
+        <div class="view-title-group">
+
+          <span class="view-icon">🔮</span>
+
+          <div>
+
+            <h3>AI Career Path Predictor</h3>
+
+            <p>Predict future career opportunities, compensation trajectories, and breakthrough competencies</p>
+
+          </div>
+
+        </div>
+
+        <div class="view-actions">
+
+          <button type="button" id="recalcPredictorBtn" class="primary-btn">
+
+            <span>⚡ Recalculate Trajectory</span>
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Trajectory Overview Banner -->
+
+      <div class="predictor-hero-card" id="predictorHeroCard">
+
+        <div class="predictor-hero-left">
+
+          <span class="prediction-badge-ai">AI Trajectory Forecast</span>
+
+          <h2 id="predictTrajectoryTitle">Analyzing Career Vectors...</h2>
+
+          <p id="predictTrajectoryDesc">Evaluating your verified skills, experience tier, and live industry demand curves.</p>
+
+          <div class="predictor-metrics-pills">
+
+            <span class="pred-pill">🎯 Trajectory Confidence: <strong id="predictConfidenceScore">--%</strong></span>
+
+            <span class="pred-pill">⏳ Current Experience: <strong id="predictExpYears">--</strong></span>
+
+            <span class="pred-pill">📈 Growth Momentum: <strong id="predictGrowthPace">Accelerated (Top 5%)</strong></span>
+
+          </div>
+
+        </div>
+
+        <div class="predictor-hero-gauge">
+
+          <div class="momentum-gauge-ring">
+
+            <div class="gauge-value" id="predictMomentumVal">--%</div>
+
+            <div class="gauge-label">Momentum</div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- 3 Horizons Grid (1-Year, 3-Year, 5-Year) -->
+
+      <div class="milestones-grid" id="predictorMilestonesGrid">
+
+        <!-- Rendered dynamically -->
+
+      </div>
+
+
+
+      <!-- Two-Column Analytics: Salary Forecast & Breakthrough Skills -->
+
+      <div class="predictor-analytics-row">
+
+        <!-- Left: Salary Forecast Chart -->
+
+        <div class="analytics-card">
+
+          <div class="card-title-row">
+
+            <h4>💰 Projected Compensation Trajectory</h4>
+
+            <span class="badge-mini">5-Year Growth Outlook</span>
+
+          </div>
+
+          <p class="analytics-sub">Median annual market compensation as you advance along this predicted trajectory</p>
+
+          <div class="salary-forecast-bars" id="predictSalaryBars">
+
+            <!-- Rendered dynamically -->
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Right: Breakthrough Skills & High-Appetite Industries -->
+
+        <div class="analytics-card">
+
+          <div class="card-title-row">
+
+            <h4>🚀 High-ROI Breakthrough Skills</h4>
+
+            <span class="badge-mini">Strategic Catalysts</span>
+
+          </div>
+
+          <p class="analytics-sub">Acquiring these key capabilities unlocks maximum senior compensation jumps</p>
+
+          <div class="breakthrough-skills-list" id="predictBreakthroughSkills">
+
+            <!-- Rendered dynamically -->
+
+          </div>
+
+
+
+          <h5 style="margin-top:1.25rem; margin-bottom:0.6rem; font-size:0.85rem; color:var(--text-secondary);">🌐 Top Hiring Industries for Your Trajectory:</h5>
+
+          <div class="industry-transition-chips" id="predictIndustryChips">
+
+            <!-- Rendered dynamically -->
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+  
+
+    <!-- ==============================================================================
+
+         FEATURE 2: SMART SKILL GAP FINDER & PERSONALIZED LEARNING ROADMAP
+
+         ============================================================================== -->
+
+    <section id="skillGapSection" class="platform-view-section hidden">
+
+      <div class="view-header-strip">
+
+        <div class="view-title-group">
+
+          <span class="view-icon">🧩</span>
+
+          <div>
+
+            <h3>Smart Skill Gap Finder & Learning Roadmap</h3>
+
+            <p>Compare your competencies with target job requirements, pinpoint missing skills, and execute an actionable roadmap</p>
+
+          </div>
+
+        </div>
+
+        <div class="view-actions" style="display:flex; align-items:center; gap:0.75rem;">
+
+          <label style="font-size:0.8rem; font-weight:700; color:var(--text-secondary); margin-bottom:0;">Target Position:</label>
+
+          <select id="gapTargetJobSelect" class="custom-select" style="min-width:280px; padding:0.45rem 0.85rem;">
+
+            <!-- Populated dynamically with all catalog jobs -->
+
+          </select>
+
+          <button type="button" id="refreshSkillGapBtn" class="primary-btn">
+
+            <span>⚡ Analyze Gap</span>
+
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Match Boost Banner -->
+
+      <div class="skill-gap-hero-card">
+
+        <div class="gap-hero-info">
+
+          <span class="prediction-badge-ai" style="background:linear-gradient(135deg, #059669 0%, #0284c7 100%);">Gap Intelligence</span>
+
+          <h2 id="gapJobHeaderTitle">Target Role: Senior Java Full Stack Engineer</h2>
+
+          <p id="gapJobHeaderCompany">at <strong>Stripe</strong> • San Francisco, CA (Remote) • Level: Senior (5+ yrs)</p>
+
+          <div class="gap-metrics-pills">
+
+            <span class="pred-pill">⏱️ Est. Time to Close: <strong id="gapTimeToClose">4 to 6 Weeks</strong></span>
+
+            <span class="pred-pill">🎯 Skills Required: <strong id="gapTotalReqCount">0 Skills</strong></span>
+
+            <span class="pred-pill">🚀 Match Uplift: <strong id="gapMatchUplift">+0% Match Potential</strong></span>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="gap-hero-meters">
+
+          <div class="gap-meter-box">
+
+            <span class="meter-label">Current Match</span>
+
+            <span class="meter-num current" id="gapCurrentMatchVal">--%</span>
+
+            <div class="mini-bar-track"><div class="mini-bar-fill current" id="gapCurrentBar" style="width:0%;"></div></div>
+
+          </div>
+
+          <span class="meter-arrow">➔</span>
+
+          <div class="meter-box">
+
+            <span class="meter-label">Potential Match</span>
+
+            <span class="meter-num potential" id="gapPotentialMatchVal">--%</span>
+
+            <div class="mini-bar-track"><div class="mini-bar-fill potential" id="gapPotentialBar" style="width:0%;"></div></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Skills Breakdown Row -->
+
+      <div class="gap-breakdown-row">
+
+        <!-- Matched Skills -->
+
+        <div class="gap-skills-card matched-card">
+
+          <div class="card-title-row">
+
+            <h4>✅ Acquired & Verified Skills (<span id="gapMatchedCount">0</span>)</h4>
+
+            <span class="badge-mini" style="background:#ecfdf5; color:#059669; border-color:#a7f3d0;">Direct Match</span>
+
+          </div>
+
+          <p class="analytics-sub">Skills currently on your verified profile that directly satisfy job prerequisites</p>
+
+          <div class="skills-tag-grid" id="gapMatchedSkillsList">
+
+            <!-- Dynamically populated -->
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Missing Critical Skills -->
+
+        <div class="gap-skills-card critical-card">
+
+          <div class="card-title-row">
+
+            <h4>⚡ Missing Critical Skills (<span id="gapCriticalCount">0</span>)</h4>
+
+            <span class="badge-mini" style="background:#fef2f2; color:#dc2626; border-color:#fecaca;">High Impact</span>
+
+          </div>
+
+          <p class="analytics-sub">Mandatory prerequisites for this role. Learning these yields immediate match score jumps</p>
+
+          <div class="skills-tag-grid" id="gapCriticalSkillsList">
+
+            <!-- Dynamically populated -->
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Missing Secondary Skills -->
+
+        <div class="gap-skills-card secondary-card">
+
+          <div class="card-title-row">
+
+            <h4>🌟 Nice-to-Have Skills (<span id="gapSecondaryCount">0</span>)</h4>
+
+            <span class="badge-mini" style="background:#f5f3ff; color:#7c3aed; border-color:#ddd6fe;">Bonus Advantage</span>
+
+          </div>
+
+          <p class="analytics-sub">Preferred supplementary capabilities that give you an edge over other applicants</p>
+
+          <div class="skills-tag-grid" id="gapSecondarySkillsList">
+
+            <!-- Dynamically populated -->
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Personalized Learning Roadmap Timeline -->
+
+      <div class="gap-roadmap-section">
+
+        <div class="roadmap-header">
+
+          <div>
+
+            <h4>🗺️ Personalized Step-by-Step Learning Roadmap</h4>
+
+            <p style="font-size:0.82rem; color:var(--text-muted);">Curated project milestones, hours breakdown, and vetted documentation to close all skill gaps</p>
+
+          </div>
+
+          <span class="badge-mini" style="background:#f0fdf4; color:#15803d; border-color:#bbf7d0; font-weight:800; font-size:0.75rem;">Action-Oriented</span>
+
+        </div>
+
+
+
+        <div class="roadmap-timeline" id="gapRoadmapTimeline">
+
+          <!-- Rendered dynamically -->
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+  
+
+    <!-- ========================================== -->
+
+    <!-- CARRERX GLOBAL SITE FOOTER -->
+
+    <!-- ========================================== -->
+
+    <footer class="app-global-footer">
+
+      <div class="footer-container">
+
+        <div class="footer-brand-wrap">
+
+          <div class="footer-logo">
+
+            <span class="footer-logo-icon">⚡</span>
+
+            <span class="footer-brand-name">CarrerX <span class="badge-ai">AI</span></span>
+
+          </div>
+
+          <p class="footer-desc">Intelligent Job Matching • Company Intelligence • Live Applications • AI Career Acceleration</p>
+
+        </div>
+
+        <div class="footer-nav-links">
+
+          <a href="#heroSection" class="footer-link">Job Matches</a>
+          <a href="#careerPredictorSection" class="footer-link">Career Predictor</a>
+          <a href="#skillGapSection" class="footer-link">Skill Gap Finder</a>
+        </div>
+
+        <div class="footer-bottom-row">
+
+          <span>© 2026 CarrerX. All rights reserved. • Empowering Next-Generation Tech Careers</span>
+
+          <span class="footer-status-pill">Backend: Java 17 Engine (Port 8080)</span>
+
+        </div>
+
+      </div>
+
+    </footer>
+
+
+
+  </main>
+
+  </div><!-- end mainAppLayout -->
+
+
+
+  <!-- MODAL: ATTRIBUTE WEIGHTS TUNING DIALOG -->
+
+  <div id="weightsModal" class="modal-backdrop hidden">
+
+    <div class="modal-box modal-md">
+
+      <div class="modal-header">
+
+        <div class="modal-company-title">
+
+          <span class="company-logo-badge">⚖️</span>
+
+          <div>
+
+            <h2>Multi-Attribute Matching Weights</h2>
+
+            <p>Customize how different dimensions calculate the overall match score</p>
+
+          </div>
+
+        </div>
+
+        <button id="closeWeightsModalBtn" class="close-modal-btn">✕</button>
+
+      </div>
+
+      <div class="modal-body">
+
+        <p style="font-size:0.85rem; color:var(--text-secondary);">
+
+          By default, the system gives <strong>60% weight to Technical Skills Match</strong>. You can adjust the balance below:
+
+        </p>
+
+
+
+        <div class="modal-weight-slider-group">
+
+          <div class="weight-item">
+
+            <div class="weight-label-row">
+
+              <span>🧠 Skills Match (Technical & Required):</span>
+
+              <strong id="modalSkillsWeightVal">60%</strong>
+
+            </div>
+
+            <input type="range" id="modalWeightSkills" min="30" max="80" value="60" class="weight-slider">
+
+          </div>
+
+
+
+          <div class="weight-item">
+
+            <div class="weight-label-row">
+
+              <span>⏳ Experience Level Alignment:</span>
+
+              <strong id="modalExpWeightVal">20%</strong>
+
+            </div>
+
+            <input type="range" id="modalWeightExp" min="10" max="40" value="20" class="weight-slider">
+
+          </div>
+
+
+
+          <div class="weight-item">
+
+            <div class="weight-label-row">
+
+              <span>💰 Salary Expectation Fit:</span>
+
+              <strong id="modalSalWeightVal">10%</strong>
+
+            </div>
+
+            <input type="range" id="modalWeightSal" min="5" max="30" value="10" class="weight-slider">
+
+          </div>
+
+
+
+          <div class="weight-item">
+
+            <div class="weight-label-row">
+
+              <span>🌐 Work Mode & Discipline Preference:</span>
+
+              <strong id="modalPrefWeightVal">10%</strong>
+
+            </div>
+
+            <input type="range" id="modalWeightPref" min="5" max="30" value="10" class="weight-slider">
+
+          </div>
+
+        </div>
+
+
+
+        <div class="weights-total-strip">
+
+          <span>Total Normalized Weight:</span>
+
+          <strong id="weightsTotalSum" class="text-green">100%</strong>
+
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+
+        <button id="saveWeightsModalBtn" class="primary-btn">Apply Weights & Recalculate</button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- MODAL: JOB DETAILS WITH DEEP COMPANY & LOCATION INTELLIGENCE -->
+
+  <div id="jobDetailsModal" class="modal-backdrop hidden">
+
+    <div class="modal-box modal-lg">
+
+      <div class="modal-header">
+
+        <div class="modal-company-title">
+
+          <span id="modalCompanyLogo" class="company-logo-badge">🏢</span>
+
+          <div>
+
+            <h2 id="modalJobTitle">Job Title</h2>
+
+            <p id="modalCompanyLocation">Company • Location</p>
+
+          </div>
+
+        </div>
+
+        <button id="closeJobDetailsModalBtn" class="close-modal-btn">✕</button>
+
+      </div>
+
+
+
+      <div class="modal-body">
+
+        <!-- Salary & Meta strip -->
+
+        <div class="modal-salary-strip">
+
+          <div class="salary-highlight">
+
+            <span class="sub">Annual Compensation</span>
+
+            <span id="modalSalaryRange" class="amount">₹18 - ₹28 LPA</span>
+
+          </div>
+
+          <div class="salary-pill" id="modalSalaryFit">Within Target</div>
+
+          <div class="meta-pills">
+
+            <span id="modalWorkMode" class="badge">Remote</span>
+
+            <span id="modalExpLevel" class="badge">Senior (5+ yrs)</span>
+
+            <span id="modalJobType" class="badge">Full-time</span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- NEW: Deep Company Profile Overview -->
+
+        <div class="modal-section company-info-section">
+
+          <h3>🏢 Company Overview & Culture</h3>
+
+          <div class="company-details-grid" id="modalCompanyDetailsGrid">
+
+            <!-- Populated dynamically -->
+
+          </div>
+
+        </div>
+
+
+
+        <!-- NEW: Location Intelligence & Climate Guide -->
+
+        <div class="modal-section location-climate-section">
+
+          <h3>📍 Location & Climate Guide</h3>
+
+          <div class="location-details-grid" id="modalLocationDetailsGrid">
+
+            <!-- Populated dynamically -->
+
+          </div>
+
+        </div>
+
+
+
+        <!-- NEW: When to Join & Holidays Policy -->
+
+        <div class="modal-section joining-holidays-section">
+
+          <h3>📅 Onboarding, Joining & Holiday Policies</h3>
+
+          <div class="joining-holidays-grid" id="modalJoiningHolidaysGrid">
+
+            <!-- Populated dynamically -->
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Multi-attribute score breakdown -->
+
+        <div class="modal-section">
+
+          <h3>Weighted Score Breakdown (60% Skills)</h3>
+
+          <div class="breakdown-grid" id="modalScoreBreakdownGrid"></div>
+
+        </div>
+
+
+
+        <!-- Skills breakdown -->
+
+        <div class="modal-section">
+
+          <h3>Skills Compatibility Analysis</h3>
+
+          <div class="skill-comparison-grid">
+
+            <div class="skill-col">
+
+              <span class="skill-col-heading text-green">✓ Your Matched Skills</span>
+
+              <div id="modalMatchedSkills" class="tags-row"></div>
+
+            </div>
+
+            <div class="skill-col">
+
+              <span class="skill-col-heading text-amber">⚡ Skills You Might Need</span>
+
+              <div id="modalMissingSkills" class="tags-row"></div>
+
+            </div>
+
+            <div class="skill-col">
+
+              <span class="skill-col-heading text-blue">★ Bonus Qualifications</span>
+
+              <div id="modalBonusSkills" class="tags-row"></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Role Description -->
+
+        <div class="modal-section">
+
+          <h3>Role Overview & Responsibilities</h3>
+
+          <p id="modalJobDescription" class="modal-desc-text"></p>
+
+        </div>
+
+
+
+        <!-- Perks & Benefits -->
+
+        <div class="modal-section">
+
+          <h3>Benefits & Perks</h3>
+
+          <ul id="modalBenefitsList" class="benefits-grid"></ul>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="modal-footer">
+
+        <button id="modalSaveJobBtn" class="secondary-btn">🔖 Bookmark Job</button>
+
+        <button id="modalApplyNowBtn" class="primary-btn">🚀 Apply Now for this Job</button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- MODAL: LIVE JOB APPLICATION & INTERVIEW PORTAL (FULLY ALIVE FEATURE) -->
+
+  <div id="applicationModal" class="modal-backdrop hidden">
+
+    <div class="modal-box modal-md">
+
+      <div class="modal-header">
+
+        <div>
+
+          <h2>Apply for <span id="applyModalJobTitle" class="highlight-text">Role</span></h2>
+
+          <p id="applyModalCompany">at Company Name</p>
+
+        </div>
+
+        <button id="closeApplyModalBtn" class="close-modal-btn">✕</button>
+
+      </div>
+
+
+
+      <!-- Application Form View -->
+
+      <form id="applicationForm" class="modal-body application-form" novalidate>
+
+        
+
+        <div class="application-step-banner">
+
+          <span>🚀 Live Direct Application to Hiring Team • Reference tracked</span>
+
+        </div>
+
+
+
+        <!-- Inline Application Alert / Error Container -->
+
+        <div id="applyErrorAlert" class="alert-error-box hidden" role="alert"></div>
+
+
+
+        <!-- Candidate Personal Details -->
+
+        <div class="form-row-2">
+
+          <div class="form-group">
+
+            <label for="applyFullName">Full Name *</label>
+
+            <input type="text" id="applyFullName" required placeholder="Alex Developer">
+
+          </div>
+
+          <div class="form-group">
+
+            <label for="applyEmail">Email Address *</label>
+
+            <input type="email" id="applyEmail" required placeholder="alex@example.com">
+
+          </div>
+
+        </div>
+
+
+
+        <div class="form-row-2">
+
+          <div class="form-group">
+
+            <label for="applyPhone">Phone Number *</label>
+
+            <input type="tel" id="applyPhone" required placeholder="+1 (555) 019-2834">
+
+          </div>
+
+          <div class="form-group">
+
+            <label for="applyExpectedSalary" id="applyExpectedSalaryLabel">Expected Annual Package (₹ LPA or ₹/yr) *</label>
+
+            <input type="number" id="applyExpectedSalary" required placeholder="85000">
+
+          </div>
+
+        </div>
+
+
+
+        <!-- When to Join / Onboarding Availability (NEW) -->
+
+        <div class="form-row-2">
+
+          <div class="form-group">
+
+            <label for="applyJoiningTimeline">When Can You Join? *</label>
+
+            <select id="applyJoiningTimeline" class="custom-select" required>
+
+              <option value="Immediate (Within 2 weeks)">Immediate (Within 2 weeks)</option>
+
+              <option value="15 to 30 Days (Standard notice)">15 to 30 Days (Standard notice)</option>
+
+              <option value="45 to 60 Days Notice">45 to 60 Days Notice</option>
+
+              <option value="Flexible / Negotiable">Flexible / Negotiable</option>
+
+            </select>
+
+          </div>
+
+          <div class="form-group">
+
+            <label for="applyWorkAuth">Work Authorization *</label>
+
+            <select id="applyWorkAuth" class="custom-select" required>
+
+              <option value="Authorized (No visa sponsorship required)">Authorized (No sponsorship needed)</option>
+
+              <option value="Require Visa Sponsorship">Require Visa Sponsorship</option>
+
+              <option value="Student Visa (OPT / CPT)">Student Visa (OPT / CPT)</option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="form-group">
+
+          <label for="applyPortfolio">LinkedIn / GitHub / Portfolio URL</label>
+
+          <input type="url" id="applyPortfolio" placeholder="https://github.com/your-username or linkedin.com/in/you">
+
+        </div>
+
+
+
+        <!-- The Three Work Mode Options for Application -->
+
+        <div class="form-group">
+
+          <label>Preferred Work Mode (Choose from the 3 Options) *</label>
+
+          <div class="apply-workmode-options">
+
+            <label class="workmode-radio-label">
+
+              <input type="radio" name="applyWorkModeRadio" value="Online/Remote" checked>
+
+              <span class="radio-custom-box">
+
+                <span class="icon">💻</span>
+
+                <strong>Online/Remote</strong>
+
+                <small>100% remote / distributed</small>
+
+              </span>
+
+            </label>
+
+            <label class="workmode-radio-label">
+
+              <input type="radio" name="applyWorkModeRadio" value="Offline/On-site">
+
+              <span class="radio-custom-box">
+
+                <span class="icon">🏢</span>
+
+                <strong>Offline/On-site</strong>
+
+                <small>Physical campus office</small>
+
+              </span>
+
+            </label>
+
+            <label class="workmode-radio-label">
+
+              <input type="radio" name="applyWorkModeRadio" value="Hybrid">
+
+              <span class="radio-custom-box">
+
+                <span class="icon">🔄</span>
+
+                <strong>Hybrid</strong>
+
+                <small>Flexible 2-3 days office</small>
+
+              </span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Option to Apply to More Than One Job Simultaneously -->
+
+        <div class="form-group additional-jobs-apply-section">
+
+          <div class="additional-jobs-header">
+
+            <label>➕ Apply to More Than One Job Simultaneously:</label>
+
+            <span class="badge-mini">Batch Multi-Apply</span>
+
+          </div>
+
+          <p class="section-sub-hint">Check any additional roles below to submit your application to multiple companies with 1 click:</p>
+
+          <div id="additionalJobsCheckboxes" class="additional-jobs-list">
+
+            <!-- Dynamically populated with other matching jobs -->
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Tailored Cover Letter -->
+
+        <div class="form-group">
+
+          <div class="cover-letter-header">
+
+            <label for="applyCoverLetter">AI-Tailored Cover Letter</label>
+
+            <button type="button" id="regenerateCoverLetterBtn" class="regen-btn" title="Regenerate letter using current skills">🔄 Regenerate</button>
+
+          </div>
+
+          <textarea id="applyCoverLetter" rows="6" placeholder="Your cover letter will be automatically tailored to the matching skills and job requirements..."></textarea>
+
+        </div>
+
+
+
+        <div class="modal-footer form-footer">
+
+          <button type="button" id="cancelApplyBtn" class="secondary-btn">Cancel</button>
+
+          <button type="submit" id="submitApplyBtn" class="primary-btn">Apply Now 🚀</button>
+
+        </div>
+
+      </form>
+
+
+
+      <!-- Immediate Application Status & Lifecycle Portal (Shown After Submitting) -->
+
+      <div id="applySuccessScreen" class="modal-body application-success-view hidden">
+
+        <div class="success-top-banner">
+
+          <div class="success-animation-icon">🎉</div>
+
+          <h2>Application Submitted & Tracking Activated!</h2>
+
+          <p class="success-subtext">Your tailored cover letter and profile are registered with <strong id="successCompany">Company</strong>.</p>
+
+        </div>
+
+        
+
+        <div class="status-summary-card">
+
+          <div class="receipt-row">
+
+            <span>Reference Tracking ID:</span>
+
+            <strong id="successAppId" class="receipt-id">APP-2026-1001</strong>
+
+          </div>
+
+          <div class="receipt-row">
+
+            <span>Role Applied:</span>
+
+            <strong id="successJobTitle">Associate Java Developer</strong>
+
+          </div>
+
+          <div class="receipt-row">
+
+            <span>Joining Availability:</span>
+
+            <span id="successJoining">Immediate (Within 2 weeks)</span>
+
+          </div>
+
+          <div class="receipt-row">
+
+            <span>Current Application Stage:</span>
+
+            <span id="modalCurrentStageBadge" class="stage-badge-pill stage-assessment">Test/Assessment</span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- 5 Defined Stages Stepper -->
+
+        <div class="application-stage-tracker-box">
+
+          <h4 class="tracker-stepper-title">Candidate Pipeline Progress (5 Defined Stages)</h4>
+
+          <div class="stepper-horizontal" id="modalStageStepper">
+
+            <div class="step-item active" data-step="Applied">
+
+              <div class="step-dot">1</div>
+
+              <span class="step-name">Applied</span>
+
+            </div>
+
+            <div class="step-line"></div>
+
+            <div class="step-item" data-step="Under Review">
+
+              <div class="step-dot">2</div>
+
+              <span class="step-name">Under Review</span>
+
+            </div>
+
+            <div class="step-line"></div>
+
+            <div class="step-item" data-step="Shortlisted">
+
+              <div class="step-dot">3</div>
+
+              <span class="step-name">Shortlisted</span>
+
+            </div>
+
+            <div class="step-line"></div>
+
+            <div class="step-item" data-step="Interview">
+
+              <div class="step-dot">4</div>
+
+              <span class="step-name">Interview</span>
+
+            </div>
+
+            <div class="step-line"></div>
+
+            <div class="step-item" data-step="Selected">
+
+              <div class="step-dot">5</div>
+
+              <span class="step-name">Selected</span>
+
+            </div>
+
+            <div class="step-line branch"></div>
+
+            <div class="step-item branch-item" data-step="Rejected">
+
+              <div class="step-dot">✕</div>
+
+              <span class="step-name">Rejected</span>
+
+            </div>
+
+          </div>
+
+
+
+          <!-- Official Hiring Status Note -->
+
+          <div class="status-note-box">
+
+            <span class="note-label">📢 Hiring Team Note:</span>
+
+            <p id="modalStatusNoteText" class="note-content">Your application and tailored cover letter have been shortlisted for the initial Test/Assessment round.</p>
+
+          </div>
+
+        </div>
+
+            <span class="lock-pill">🔒 Assigned by Backend</span>
+
+          </div>
+
+          <p class="verdict-info-text">
+
+            ℹ️ <em>Candidates cannot manually select their hiring stage. The stage is selected automatically by the backend system upon applying, based on your qualifications, skills match, and job requirements.</em>
+
+          </p>
+
+        </div>
+
+
+
+        <div class="success-actions">
+
+          <button type="button" id="goToDashboardTrackerBtn" class="primary-btn">📊 View Live on Dashboard</button>
+
+          <button type="button" id="viewMyAppsFromSuccessBtn" class="secondary-btn">📋 View All Applications</button>
+
+          <button type="button" id="doneSuccessBtn" class="secondary-btn">Done</button>
+
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-- MODAL: BATCH MULTI-JOB APPLICATION PORTAL -->
+
+  <div id="batchApplicationModal" class="modal-backdrop hidden">
+
+    <div class="modal-box modal-lg">
+
+      <div class="modal-header">
+
+        <div class="modal-company-title">
+
+          <span class="company-logo-badge">🚀</span>
+
+          <div>
+
+            <h2>Batch Apply to <span id="batchModalJobsCount" class="highlight-text">0</span> Selected Jobs</h2>
+
+            <p>One unified application submitted simultaneously across all selected roles</p>
+
+          </div>
+
+        </div>
+
+        <button id="closeBatchModalBtn" class="close-modal-btn">✕</button>
+
+      </div>
+
+
+
+      <!-- Batch Form View -->
+
+      <form id="batchApplicationForm" class="modal-body application-form">
+
+        <!-- Selected Jobs Summary List -->
+
+        <div class="batch-selected-jobs-section">
+
+          <div class="batch-jobs-header">
+
+            <h4>📋 Selected Positions for This Batch (<span id="batchListSummaryCount">0</span> Roles):</h4>
+
+            <span class="batch-auto-badge">✓ Real-time 5-Stage Tracking</span>
+
+          </div>
+
+          <div id="batchSelectedJobsList" class="batch-jobs-scroll-grid">
+
+            <!-- Dynamically populated with selected jobs cards -->
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Candidate Personal Details -->
+
+        <div class="form-row-2">
+
+          <div class="form-group">
+
+            <label for="batchFullName">Full Name *</label>
+
+            <input type="text" id="batchFullName" required placeholder="Alex Developer">
+
+          </div>
+
+          <div class="form-group">
+
+            <label for="batchEmail">Email Address *</label>
+
+            <input type="email" id="batchEmail" required placeholder="alex@example.com">
+
+          </div>
+
+        </div>
+
+
+
+        <div class="form-row-2">
+
+          <div class="form-group">
+
+            <label for="batchPhone">Phone Number *</label>
+
+            <input type="tel" id="batchPhone" required placeholder="+1 (555) 019-2834">
+
+          </div>
+
+          <div class="form-group">
+
+            <label for="batchExpectedSalary" id="batchExpectedSalaryLabel">Expected Annual Package (₹ LPA or ₹/yr) *</label>
+
+            <input type="number" id="batchExpectedSalary" required placeholder="85000">
+
+          </div>
+
+        </div>
+
+
+
+        <!-- The Three Work Mode Options for Application -->
+
+        <div class="form-group">
+
+          <label>Preferred Work Mode (Choose from the 3 Options) *</label>
+
+          <div class="apply-workmode-options">
+
+            <label class="workmode-radio-label">
+
+              <input type="radio" name="batchWorkModeRadio" value="Online/Remote" checked>
+
+              <span class="radio-custom-box">
+
+                <span class="icon">💻</span>
+
+                <strong>Online/Remote</strong>
+
+                <small>100% remote / distributed</small>
+
+              </span>
+
+            </label>
+
+            <label class="workmode-radio-label">
+
+              <input type="radio" name="batchWorkModeRadio" value="Offline/On-site">
+
+              <span class="radio-custom-box">
+
+                <span class="icon">🏢</span>
+
+                <strong>Offline/On-site</strong>
+
+                <small>Physical campus office</small>
+
+              </span>
+
+            </label>
+
+            <label class="workmode-radio-label">
+
+              <input type="radio" name="batchWorkModeRadio" value="Hybrid">
+
+              <span class="radio-custom-box">
+
+                <span class="icon">🔄</span>
+
+                <strong>Hybrid</strong>
+
+                <small>Flexible 2-3 days office</small>
+
+              </span>
+
+            </label>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- When to Join / Onboarding Availability -->
+
+        <div class="form-row-2">
+
+          <div class="form-group">
+
+            <label for="batchJoiningTimeline">When Can You Join? *</label>
+
+            <select id="batchJoiningTimeline" class="custom-select" required>
+
+              <option value="Immediate (Within 2 weeks)">Immediate (Within 2 weeks)</option>
+
+              <option value="15 to 30 Days (Standard notice)">15 to 30 Days (Standard notice)</option>
+
+              <option value="45 to 60 Days Notice">45 to 60 Days Notice</option>
+
+              <option value="Flexible / Negotiable">Flexible / Negotiable</option>
+
+            </select>
+
+          </div>
+
+          <div class="form-group">
+
+            <label for="batchWorkAuth">Work Authorization *</label>
+
+            <select id="batchWorkAuth" class="custom-select" required>
+
+              <option value="Authorized (No visa sponsorship required)">Authorized (No sponsorship needed)</option>
+
+              <option value="Require Visa Sponsorship">Require Visa Sponsorship</option>
+
+              <option value="Student Visa (OPT / CPT)">Student Visa (OPT / CPT)</option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="form-group">
+
+          <label for="batchPortfolio">LinkedIn / GitHub / Portfolio URL</label>
+
+          <input type="url" id="batchPortfolio" placeholder="https://github.com/your-username or linkedin.com/in/you">
+
+        </div>
+
+
+
+        <!-- Unified Tailored Cover Letter -->
+
+        <div class="form-group">
+
+          <div class="cover-letter-header">
+
+            <label for="batchCoverLetter">AI-Tailored Multi-Application Statement</label>
+
+          </div>
+
+          <textarea id="batchCoverLetter" rows="4" placeholder="Unified statement highlighting your technical competencies for all selected roles..."></textarea>
+
+        </div>
+
+
+
+        <div class="modal-footer form-footer">
+
+          <button type="button" id="cancelBatchApplyBtn" class="secondary-btn">Cancel</button>
+
+          <button type="submit" id="submitBatchApplyBtn" class="primary-btn">Submit Applications to All Roles 🚀</button>
+
+        </div>
+
+      </form>
+
+
+
+      <!-- Batch Success Screen -->
+
+      <div id="batchSuccessScreen" class="modal-body application-success-view hidden">
+
+        <div class="success-top-banner">
+
+          <div class="success-animation-icon">🎉</div>
+
+          <h2>Multi-Job Applications Submitted Successfully!</h2>
+
+          <p class="success-subtext">You have registered applications for <strong id="batchSuccessCount">0</strong> positions simultaneously.</p>
+
+        </div>
+
+
+
+        <div class="batch-results-list" id="batchSubmittedResultsList">
+
+          <!-- Populated dynamically with created applications -->
+
+        </div>
+
+
+
+        <div class="success-actions">
+
+          <button type="button" id="goToDashboardFromBatchBtn" class="primary-btn">📊 Track All on Dashboard</button>
+
+          <button type="button" id="closeBatchSuccessBtn" class="secondary-btn">Done</button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- MODAL: APPLICATION STATUS & STAGE PROGRESSION -->
+
+  <div id="applicationStatusModal" class="modal-backdrop hidden">
+
+    <div class="modal-box modal-md">
+
+      <div class="modal-header">
+
+        <div class="modal-company-title">
+
+          <span id="appStatusCompanyLogo" class="company-logo-badge">🏢</span>
+
+          <div>
+
+            <h2 id="appStatusJobTitle">Role Title</h2>
+
+            <p id="appStatusCompany">Company • Tracking Reference</p>
+
+          </div>
+
+        </div>
+
+        <button id="closeAppStatusModalBtn" class="close-modal-btn">✕</button>
+
+      </div>
+
+
+
+      <div class="modal-body">
+
+        <!-- Stage Status Pill & Key Stats -->
+
+        <div class="status-summary-card">
+
+          <div class="receipt-row">
+
+            <span>Reference Tracking ID:</span>
+
+            <strong id="statusModalAppId" class="receipt-id">APP-2026-1001</strong>
+
+          </div>
+
+          <div class="receipt-row">
+
+            <span>Current Stage:</span>
+
+            <span id="statusModalStageBadge" class="stage-badge-pill stage-assessment">Test/Assessment</span>
+
+          </div>
+
+          <div class="receipt-row">
+
+            <span>Expected Compensation:</span>
+
+            <span id="statusModalSalary">₹12 LPA</span>
+
+          </div>
+
+          <div class="receipt-row">
+
+            <span>Submitted On:</span>
+
+            <span id="statusModalDate">2026-10-28 15:40:00</span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- 5-Stage Stepper -->
+
+        <div class="application-stage-tracker-box">
+
+          <h4 class="tracker-stepper-title">Candidate Pipeline Progress (5 Defined Stages)</h4>
+
+          <div class="stepper-horizontal" id="statusModalStepper">
+
+            <div class="step-item active" data-step="Applied">
+
+              <div class="step-dot">1</div>
+
+              <span class="step-name">Applied</span>
+
+            </div>
+
+            <div class="step-line"></div>
+
+            <div class="step-item" data-step="Under Review">
+
+              <div class="step-dot">2</div>
+
+              <span class="step-name">Under Review</span>
+
+            </div>
+
+            <div class="step-line"></div>
+
+            <div class="step-item" data-step="Shortlisted">
+
+              <div class="step-dot">3</div>
+
+              <span class="step-name">Shortlisted</span>
+
+            </div>
+
+            <div class="step-line"></div>
+
+            <div class="step-item" data-step="Interview">
+
+              <div class="step-dot">4</div>
+
+              <span class="step-name">Interview</span>
+
+            </div>
+
+            <div class="step-line"></div>
+
+            <div class="step-item" data-step="Selected">
+
+              <div class="step-dot">5</div>
+
+              <span class="step-name">Selected</span>
+
+            </div>
+
+            <div class="step-line branch"></div>
+
+            <div class="step-item branch-item" data-step="Rejected">
+
+              <div class="step-dot">✕</div>
+
+              <span class="step-name">Rejected</span>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="status-note-box">
+
+            <span class="note-label">📢 Hiring Status Note:</span>
+
+            <p id="statusModalNote" class="note-content">Note text</p>
+
+          </div>
+
+
+
+          <!-- Interactive Stage Progression Controls -->
+
+          <div class="stage-sim-controls" style="margin-top:0.75rem; padding:0.6rem; background:var(--bg-tertiary); border:1px solid var(--border-subtle); border-radius:var(--radius-sm); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+
+            <div style="display:flex; align-items:center; gap:0.4rem; font-size:0.8rem; font-weight:700; color:var(--text-secondary);">
+
+              <span>⚡ Stage Progression (API Sync):</span>
+
+            </div>
+
+            <div style="display:flex; gap:0.35rem; flex-wrap:wrap;" id="statusProgressionBtnGroup">
+
+              <button type="button" class="sim-stage-btn" data-stage="Applied" style="font-size:0.75rem; padding:0.25rem 0.55rem; border-radius:4px; border:1px solid var(--border-subtle); background:var(--bg-card); color:var(--text-primary); cursor:pointer;">📋 Applied</button>
+
+              <button type="button" class="sim-stage-btn" data-stage="Under Review" style="font-size:0.75rem; padding:0.25rem 0.55rem; border-radius:4px; border:1px solid var(--border-subtle); background:var(--bg-card); color:var(--text-primary); cursor:pointer;">🔍 Review</button>
+
+              <button type="button" class="sim-stage-btn" data-stage="Shortlisted" style="font-size:0.75rem; padding:0.25rem 0.55rem; border-radius:4px; border:1px solid var(--border-subtle); background:var(--bg-card); color:var(--text-primary); cursor:pointer;">⚡ Shortlisted</button>
+
+              <button type="button" class="sim-stage-btn" data-stage="Interview" style="font-size:0.75rem; padding:0.25rem 0.55rem; border-radius:4px; border:1px solid var(--border-subtle); background:var(--bg-card); color:var(--text-primary); cursor:pointer;">🎙️ Interview</button>
+
+              <button type="button" class="sim-stage-btn" data-stage="Selected" style="font-size:0.75rem; padding:0.25rem 0.55rem; border-radius:4px; border:1px solid var(--border-subtle); background:var(--bg-card); color:var(--text-primary); cursor:pointer;">🟢 Selected</button>
+
+              <button type="button" class="sim-stage-btn" data-stage="Rejected" style="font-size:0.75rem; padding:0.25rem 0.55rem; border-radius:4px; border:1px solid var(--border-subtle); background:var(--bg-card); color:var(--text-primary); cursor:pointer;">🔴 Rejected</button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+            <span class="lock-pill">System Assigned</span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Full Stage Timeline -->
+
+        <div class="timeline-section">
+
+          <h4>📜 Stage Progress Audit Timeline</h4>
+
+          <div id="statusModalTimeline" class="timeline-list"></div>
+
+        </div>
+
+
+
+        <!-- Submitted Tailored Cover Letter View -->
+
+        <div class="cover-letter-preview-section">
+
+          <h4>📄 Submitted Tailored Cover Letter</h4>
+
+          <pre id="statusModalCoverLetter" class="cover-letter-text"></pre>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="modal-footer">
+
+        <button id="closeStatusModalBtnBottom" class="primary-btn">Close Tracker</button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- DRAWER: MY APPLICATIONS (LIVE TRACKING PORTAL) -->
+
+  <div id="myApplicationsDrawer" class="drawer-backdrop hidden">
+
+    <div class="drawer-container">
+
+      <div class="drawer-header">
+
+        <div class="title-with-icon">
+
+          <span class="panel-icon">📋</span>
+
+          <h3>My Submitted Applications</h3>
+
+        </div>
+
+        <button id="closeMyApplicationsDrawerBtn" class="close-drawer-btn">✕</button>
+
+      </div>
+
+      <div id="myApplicationsList" class="drawer-body">
+
+        <!-- Rendered dynamically -->
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- DRAWER: SAVED / BOOKMARKED JOBS -->
+
+  <div id="savedJobsDrawer" class="drawer-backdrop hidden">
+
+    <div class="drawer-container">
+
+      <div class="drawer-header">
+
+        <div class="title-with-icon">
+
+          <span class="panel-icon">🔖</span>
+
+          <h3>Bookmarked Opportunities</h3>
+
+        </div>
+
+        <button id="closeSavedJobsDrawerBtn" class="close-drawer-btn">✕</button>
+
+      </div>
+
+      <div class="saved-drawer-toolbar" id="savedDrawerToolbar" style="padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--border-subtle); background: #f8fafc;">
+
+        <button type="button" id="applyAllSavedJobsBtn" class="primary-btn" style="width:100%; justify-content:center;">
+
+          🚀 Apply to All Bookmarked Jobs (<span id="savedDrawerCountNum">0</span>)
+
+        </button>
+
+      </div>
+
+      <div id="savedJobsList" class="drawer-body">
+
+        <p class="drawer-empty-text">No jobs bookmarked yet. Click the 🔖 icon on any job card to save it for later.</p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- MODAL: STATISTICAL SALARY BENCHMARKING -->
+
+  <div id="salaryBenchmarkModal" class="modal-backdrop hidden">
+
+    <div class="modal-box modal-lg">
+
+      <div class="modal-header">
+
+        <div class="title-with-icon">
+
+          <span class="panel-icon">📊</span>
+
+          <div>
+
+            <h3>Live Market Salary Benchmarking</h3>
+
+            <p class="modal-subtitle">Real-time percentiles and compensation bands computed across verified opportunities</p>
+
+          </div>
+
+        </div>
+
+        <button id="closeSalaryBenchmarkModalBtn" class="close-modal-btn">✕</button>
+
+      </div>
+
+
+
+      <div class="modal-body" style="display:flex; flex-direction:column; gap:1.25rem;">
+
+        <!-- Candidate Live Ranking Card -->
+
+        <div id="benchmarkCandidateCard" class="analytics-banner" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+
+          <div class="analytics-card">
+
+            <div class="analytics-icon green">🎯</div>
+
+            <div class="analytics-info">
+
+              <span class="analytics-value" id="benchmarkPercentileVal">--th</span>
+
+              <span class="analytics-title">Market Percentile</span>
+
+            </div>
+
+          </div>
+
+          <div class="analytics-card">
+
+            <div class="analytics-icon blue">💰</div>
+
+            <div class="analytics-info">
+
+              <span class="analytics-value" id="benchmarkTargetSalaryVal">₹14 LPA</span>
+
+              <span class="analytics-title">Your Target Salary</span>
+
+            </div>
+
+          </div>
+
+          <div class="analytics-card">
+
+            <div class="analytics-icon gold">⚖️</div>
+
+            <div class="analytics-info">
+
+              <span class="analytics-value" id="benchmarkMarketPositionVal">Competitive</span>
+
+              <span class="analytics-title">Positioning Tier</span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Percentiles Overview Table -->
+
+        <div class="modal-section-card" style="background:#f8fafc; border:1px solid var(--border-subtle); border-radius:var(--radius-lg); padding:1.25rem;">
+
+          <h4 style="margin:0 0 0.75rem; color:var(--text-primary); font-size:1rem; font-weight:700;">📈 Overall Market Compensation Percentiles</h4>
+
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap:0.75rem;">
+
+            <div style="background:#ffffff; border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:0.75rem; text-align:center;">
+
+              <span style="display:block; font-size:0.75rem; color:var(--text-secondary); text-transform:uppercase; font-weight:600;">10th Percentile</span>
+
+              <strong id="benchmarkP10Val" style="font-size:1.1rem; color:var(--text-primary); font-family:var(--font-mono);">₹4.5 LPA</strong>
+
+            </div>
+
+            <div style="background:#ffffff; border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:0.75rem; text-align:center;">
+
+              <span style="display:block; font-size:0.75rem; color:var(--text-secondary); text-transform:uppercase; font-weight:600;">25th Percentile</span>
+
+              <strong id="benchmarkP25Val" style="font-size:1.1rem; color:var(--text-primary); font-family:var(--font-mono);">₹7.0 LPA</strong>
+
+            </div>
+
+            <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:var(--radius-md); padding:0.75rem; text-align:center;">
+
+              <span style="display:block; font-size:0.75rem; color:#1d4ed8; text-transform:uppercase; font-weight:700;">50th (Median)</span>
+
+              <strong id="benchmarkMedianVal" style="font-size:1.1rem; color:#1e40af; font-family:var(--font-mono);">₹14.0 LPA</strong>
+
+            </div>
+
+            <div style="background:#ffffff; border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:0.75rem; text-align:center;">
+
+              <span style="display:block; font-size:0.75rem; color:var(--text-secondary); text-transform:uppercase; font-weight:600;">75th Percentile</span>
+
+              <strong id="benchmarkP75Val" style="font-size:1.1rem; color:var(--text-primary); font-family:var(--font-mono);">₹26.0 LPA</strong>
+
+            </div>
+
+            <div style="background:#ffffff; border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:0.75rem; text-align:center;">
+
+              <span style="display:block; font-size:0.75rem; color:var(--text-secondary); text-transform:uppercase; font-weight:600;">90th Percentile</span>
+
+              <strong id="benchmarkP90Val" style="font-size:1.1rem; color:var(--text-primary); font-family:var(--font-mono);">₹42.0 LPA</strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- Experience Tier Breakdown Grid -->
+
+        <div class="modal-section-card" style="background:#ffffff; border:1px solid var(--border-subtle); border-radius:var(--radius-lg); padding:1.25rem;">
+
+          <h4 style="margin:0 0 0.75rem; color:var(--text-primary); font-size:1rem; font-weight:700;">💼 Compensation by Experience Tier</h4>
+
+          <div id="benchmarkTiersGrid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+
+            <!-- Populated dynamically -->
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="modal-footer">
+
+        <button type="button" id="closeSalaryBenchmarkModalBtnBottom" class="primary-btn">Done</button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+
+  <div id="toastContainer" class="toast-container"></div>
+
+
+
+  <!-- JAVASCRIPT LOGIC & ENGINE -->
+
+  <script src="app.js?v=7.0.0"></script>
+
+</body>
+
+</html>
+
